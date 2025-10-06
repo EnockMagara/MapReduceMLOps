@@ -2,27 +2,27 @@
 
 A comprehensive MLOps project for sentiment analysis of movie reviews using Apache Spark MapReduce and machine learning.
 
-## 
+##  Demo
 
 <div align="center">
 
-### Web Application Interface
 
-<img src="demo/Screenshot 2025-10-06 at 1.44.36 pm.png" alt="Home Screen" width="800"/>
 
-*Modern web interface with Montserrat font and warm color scheme*
+<img src="demo/ui-home.png" alt="Home Screen" width="800"/>
 
-<img src="demo/Screenshot 2025-10-06 at 1.45.57 pm.png" alt="Positive Sentiment Analysis" width="800"/>
 
-*Positive sentiment detection with confidence scores and detailed probabilities*
 
-<img src="demo/Screenshot 2025-10-06 at 1.46.42 pm.png" alt="Negative Sentiment Analysis" width="800"/>
+<img src="demo/ui-positive.png" alt="Positive Sentiment Analysis" width="800"/>
 
-*Negative sentiment detection with visual indicators*
 
-<img src="demo/Screenshot 2025-10-06 at 3.13.07 pm.png" alt="Analysis Results" width="800"/>
 
-*Real-time sentiment analysis with interactive results*
+<img src="demo/ui-negative.png" alt="Negative Sentiment Analysis" width="800"/>
+
+
+
+<img src="demo/ui-results.png" alt="Analysis Results" width="800"/>
+
+
 
 </div>
 
