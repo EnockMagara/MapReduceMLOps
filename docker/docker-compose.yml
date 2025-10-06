@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  movie-sentiment-analysis:
+    build: .
+    container_name: movie-sentiment-analysis
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+      - ./mlruns:/app/mlruns
+    ports:
+      - "4040:4040"  # Spark UI
+      - "5000:5000"  # MLflow UI
+    environment:
+      - PYTHONPATH=/app/src
+      - SPARK_DRIVER_MEMORY=2g
+      - SPARK_EXECUTOR_MEMORY=2g
+    command: ["python", "scripts/train.py", "--help"]
+    
+  mlflow-ui:
+    image: python:3.9-slim
+    container_name: mlflow-ui
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./mlruns:/mlruns
+    command: >
+      sh -c "pip install mlflow && 
+             mlflow ui --host 0.0.0.0 --port 5000 --backend-store-uri file:///mlruns"
