@@ -86,8 +86,6 @@ wandb/
 .dvc/cache/
 .dvc/tmp/
 data/processed/
-data/raw/
-models/
 artifacts/
 logs/
 checkpoints/
@@ -106,3 +104,13 @@ Thumbs.db
 spark-warehouse/
 metastore_db/
 derby.log
+
+# Allow DVC metadata files in ignored dirs
+!data/raw/*.dvc
+!models/*.dvc
+
+# Unignore DVC files in ignored dirs
+!data/raw/
+!data/raw/**.dvc
+!models/
+!models/**.dvc
