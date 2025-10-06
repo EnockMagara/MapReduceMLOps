@@ -1,0 +1,48 @@
+# Core ML and Data Processing
+pyspark==3.5.0
+scikit-learn==1.3.2
+pandas==2.1.4
+numpy==1.24.3
+
+# PyTorch and Deep Learning
+torch==2.1.0
+torchvision==0.16.0
+torchaudio==2.1.0
+transformers==4.35.0
+datasets==2.14.0
+tokenizers==0.14.0
+
+# Text Processing
+nltk==3.8.1
+spacy==3.7.2
+textblob==0.17.1
+sentencepiece==0.1.99
+
+# MLOps and Monitoring
+mlflow==2.8.1
+wandb==0.16.1
+dvc==3.27.0
+
+# Configuration and Utilities
+pyyaml==6.0.1
+python-dotenv==1.0.0
+click==8.1.7
+tqdm==4.66.1
+
+# Data Visualization
+matplotlib==3.8.2
+seaborn==0.13.0
+plotly==5.17.0
+
+# Testing
+pytest==7.4.3
+pytest-cov==4.1.0
+
+# Code Quality
+black==23.11.0
+flake8==6.1.0
+mypy==1.7.1
+
+# Jupyter
+jupyter==1.0.0
+ipykernel==6.26.0
