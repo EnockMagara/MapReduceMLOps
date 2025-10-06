@@ -5,25 +5,13 @@ A comprehensive MLOps project for sentiment analysis of movie reviews using Apac
 ##  Demo
 
 <div align="center">
+  <img src="demo/ui-home.png" alt="Home" width="49%" />
+  <img src="demo/ui-positive.png" alt="Positive" width="49%" />
+</div>
 
-
-
-<img src="demo/ui-home.png" alt="Home Screen" width="800"/>
-
-
-
-<img src="demo/ui-positive.png" alt="Positive Sentiment Analysis" width="800"/>
-
-
-
-<img src="demo/ui-negative.png" alt="Negative Sentiment Analysis" width="800"/>
-
-
-
-<img src="demo/ui-results.png" alt="Analysis Results" width="800"/>
-
-
-
+<div align="center">
+  <img src="demo/ui-negative.png" alt="Negative" width="49%" />
+  <img src="demo/ui-results.png" alt="Results" width="49%" />
 </div>
 
 ##  Project Overview
