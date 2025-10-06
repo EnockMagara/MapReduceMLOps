@@ -1,0 +1,336 @@
+@startuml Movie Review Sentiment Analysis System Structure
+
+skinparam backgroundColor #FFFFFF
+skinparam componentStyle rectangle
+
+title Movie Review Sentiment Analysis System Architecture
+
+package "External Data Sources" {
+    [IMDb Reviews] as imdb
+    [Kaggle Dataset] as kaggle
+    [User Input] as user_input
+}
+
+package "Data Layer" {
+    [Raw Data] as raw_data
+    [Processed Data] as processed_data
+    [Feature Vectors] as features
+    [Vocabulary] as vocab
+}
+
+package "Configuration Management" {
+    [config/config.yaml] as config_file
+    [src/config/settings.py] as config_settings
+    [Environment Variables] as env_vars
+}
+
+package "Core Processing Engine" {
+    package "Spark MapReduce" {
+        [src/processing/mapreduce.py] as mapreduce
+        [Word Count Mapper] as mapper
+        [TF-IDF Calculator] as tfidf
+        [Feature Extractor] as feature_extractor
+    }
+    
+    package "PyTorch Neural Networks" {
+        [src/models/pytorch_models.py] as pytorch_models
+        [src/models/pytorch_trainer.py] as pytorch_trainer
+        [src/data/pytorch_loader.py] as pytorch_loader
+    }
+    
+    package "Spark MLlib Models" {
+        [src/models/trainer.py] as spark_trainer
+        [Naive Bayes] as naive_bayes
+        [Logistic Regression] as log_reg
+        [Random Forest] as random_forest
+    }
+}
+
+package "MLOps & Monitoring" {
+    [MLflow Tracking] as mlflow
+    [Model Registry] as model_registry
+    [Experiment Tracking] as experiment_tracking
+    [Artifact Storage] as artifacts
+    [src/utils/logger.py] as logging
+    [src/utils/mlflow_utils.py] as mlflow_utils
+}
+
+package "Model Management" {
+    [Model Factory] as model_factory
+    [Model Persistence] as model_persistence
+    [Model Versioning] as model_versioning
+    [Model Evaluation] as model_eval
+}
+
+package "Application Layer" {
+    [app.py] as web_app
+    [REST API] as rest_api
+    [scripts/demo.py] as cli_demo
+    [Batch Predictor] as batch_predictor
+}
+
+package "User Interfaces" {
+    [templates/index.html] as web_ui
+    [Command Line] as cli
+    [API Endpoints] as api_endpoints
+}
+
+package "Infrastructure" {
+    [Docker Container] as docker
+    [Virtual Environment] as venv
+    [requirements.txt] as deps
+    [Makefile] as makefile
+    [pyproject.toml] as pyproject
+}
+
+' Data Flow
+imdb --> raw_data
+kaggle --> raw_data
+user_input --> web_app
+
+raw_data --> mapreduce
+raw_data --> pytorch_loader
+
+mapreduce --> processed_data
+pytorch_loader --> processed_data
+
+processed_data --> features
+features --> naive_bayes
+features --> log_reg
+features --> random_forest
+features --> lstm
+features --> transformer
+features --> bert
+
+' Configuration Flow
+config_file --> config_settings
+env_vars --> config_settings
+config_settings --> mapreduce
+config_settings --> pytorch_trainer
+config_settings --> spark_trainer
+
+' Training Flow
+spark_trainer --> naive_bayes
+spark_trainer --> log_reg
+spark_trainer --> random_forest
+pytorch_trainer --> lstm
+pytorch_trainer --> transformer
+pytorch_trainer --> bert
+
+' Model Management
+model_factory --> lstm
+model_factory --> transformer
+model_factory --> bert
+model_persistence --> model_registry
+model_eval --> mlflow
+
+' MLOps Integration
+mlflow --> experiment_tracking
+mlflow --> artifacts
+logging --> artifacts
+
+' Application Flow
+web_app --> rest_api
+rest_api --> model_factory
+cli_demo --> model_factory
+batch_predictor --> model_factory
+
+' User Interaction
+web_ui --> web_app
+cli --> cli_demo
+api_endpoints --> rest_api
+
+' Infrastructure
+docker --> web_app
+venv --> deps
+makefile --> docker
+makefile --> venv
+
+' Scripts and Automation
+package "Scripts" {
+    [scripts/train.py] as train_script
+    [scripts/train_pytorch.py] as train_pytorch_script
+    [scripts/train_hybrid.py] as train_hybrid_script
+    [scripts/predict.py] as predict_script
+    [scripts/predict_pytorch.py] as predict_pytorch_script
+    [scripts/evaluate.py] as evaluate_script
+    [scripts/demo.py] as demo_script
+}
+
+train_script --> spark_trainer
+train_pytorch_script --> pytorch_trainer
+train_hybrid_script --> spark_trainer
+train_hybrid_script --> pytorch_trainer
+predict_script --> model_factory
+predict_pytorch_script --> model_factory
+evaluate_script --> model_eval
+demo_script --> model_factory
+
+' Data Processing Components
+package "Data Processing" {
+    [src/data/loader.py] as text_preprocessor
+    [Tokenization] as tokenization
+    [Stopword Removal] as stopwords
+    [Vocabulary Builder] as vocab_builder
+}
+
+raw_data --> text_preprocessor
+text_preprocessor --> tokenization
+tokenization --> stopwords
+stopwords --> vocab_builder
+vocab_builder --> vocab
+
+' Model Components Detail
+package "Model Architectures" {
+    package "LSTM Components" {
+        [Embedding Layer] as embedding
+        [LSTM Layers] as lstm_layers
+        [Dropout] as dropout
+        [Dense Layer] as dense
+    }
+    
+    package "Transformer Components" {
+        [Multi-Head Attention] as attention
+        [Feed Forward] as feed_forward
+        [Layer Normalization] as layer_norm
+        [Positional Encoding] as pos_encoding
+    }
+    
+    package "BERT Components" {
+        [BERT Encoder] as bert_encoder
+        [Classification Head] as classification_head
+        [Tokenization] as bert_tokenization
+    }
+}
+
+pytorch_models --> embedding
+pytorch_models --> lstm_layers
+pytorch_models --> dropout
+pytorch_models --> dense
+
+pytorch_models --> attention
+pytorch_models --> feed_forward
+pytorch_models --> layer_norm
+pytorch_models --> pos_encoding
+
+pytorch_models --> bert_encoder
+pytorch_models --> classification_head
+pytorch_models --> bert_tokenization
+
+' Evaluation Metrics
+package "Evaluation" {
+    [Accuracy] as accuracy
+    [Precision] as precision
+    [Recall] as recall
+    [F1-Score] as f1
+    [AUC-ROC] as auc
+    [Confusion Matrix] as confusion_matrix
+}
+
+model_eval --> accuracy
+model_eval --> precision
+model_eval --> recall
+model_eval --> f1
+model_eval --> auc
+model_eval --> confusion_matrix
+
+' Storage and Persistence
+package "Storage" {
+    [models/] as model_files
+    [models/pytorch_*.pth] as checkpoints
+    [logs/] as log_files
+    [artifacts/] as artifact_files
+    [mlruns/] as mlflow_runs
+    [data/] as data_storage
+}
+
+model_persistence --> model_files
+pytorch_trainer --> checkpoints
+logging --> log_files
+mlflow --> artifact_files
+mlflow --> mlflow_runs
+raw_data --> data_storage
+processed_data --> data_storage
+
+note right of web_app
+  **Web Application Features:**
+  - Real-time sentiment prediction
+  - Interactive text input
+  - Confidence scores
+  - Probability distributions
+  - RESTful API endpoints
+end note
+
+note right of mlflow
+  **MLOps Features:**
+  - Experiment tracking
+  - Model versioning
+  - Artifact management
+  - Performance monitoring
+  - Reproducible experiments
+end note
+
+note right of model_factory
+  **Model Factory Pattern:**
+  - Dynamic model creation
+  - Configuration-based instantiation
+  - Support for multiple architectures
+  - Unified interface for all models
+end note
+
+note right of mapreduce
+  **MapReduce Processing:**
+  - Distributed word counting
+  - TF-IDF computation
+  - Feature extraction
+  - Scalable text processing
+end note
+
+note bottom
+  **📁 Complete File Structure:**
+  
+  **Configuration:**
+  - config/config.yaml (main config)
+  - src/config/settings.py (config loader)
+  
+  **Core Processing:**
+  - src/processing/mapreduce.py (Spark MapReduce)
+  - src/models/pytorch_models.py (LSTM/Transformer/BERT)
+  - src/models/pytorch_trainer.py (PyTorch training)
+  - src/models/trainer.py (Spark MLlib training)
+  - src/data/loader.py (Spark data loading)
+  - src/data/pytorch_loader.py (PyTorch data loading)
+  
+  **Utilities:**
+  - src/utils/logger.py (logging system)
+  - src/utils/mlflow_utils.py (MLflow integration)
+  - src/utils/spark_utils.py (Spark utilities)
+  
+  **Scripts:**
+  - scripts/train.py (Spark training)
+  - scripts/train_pytorch.py (PyTorch training)
+  - scripts/train_hybrid.py (hybrid training)
+  - scripts/predict.py (Spark prediction)
+  - scripts/predict_pytorch.py (PyTorch prediction)
+  - scripts/evaluate.py (model evaluation)
+  - scripts/demo.py (CLI demo)
+  
+  **Applications:**
+  - app.py (Flask web app)
+  - templates/index.html (web interface)
+  
+  **Infrastructure:**
+  - requirements.txt (dependencies)
+  - pyproject.toml (project config)
+  - Makefile (automation)
+  - dvc.yaml (data versioning)
+  
+  **Storage:**
+  - data/ (raw & processed data)
+  - models/ (trained models)
+  - logs/ (log files)
+  - artifacts/ (MLflow artifacts)
+  - mlruns/ (MLflow tracking)
+end note
+
+@enduml
