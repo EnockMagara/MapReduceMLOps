@@ -1,0 +1,39 @@
+stages:
+  data_preparation:
+    cmd: python scripts/prepare_data.py
+    deps:
+    - data/raw/
+    - config/config.yaml
+    outs:
+    - data/processed/
+    metrics:
+    - metrics/data_preparation.json
+
+  feature_extraction:
+    cmd: python scripts/extract_features.py
+    deps:
+    - data/processed/
+    - config/config.yaml
+    outs:
+    - data/features/
+    metrics:
+    - metrics/feature_extraction.json
+
+  model_training:
+    cmd: python scripts/train.py
+    deps:
+    - data/features/
+    - config/config.yaml
+    outs:
+    - models/
+    metrics:
+    - metrics/training.json
+
+  model_evaluation:
+    cmd: python scripts/evaluate.py
+    deps:
+    - models/
+    - data/processed/
+    - config/config.yaml
+    metrics:
+    - metrics/evaluation.json

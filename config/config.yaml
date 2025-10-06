@@ -1,0 +1,88 @@
+# Movie Review Sentiment Analysis Configuration
+
+# Data Configuration
+data:
+  raw_path: "data/raw"
+  processed_path: "data/processed"
+  train_file: "train.csv"
+  test_file: "test.csv"
+  unsupervised_file: "unsupervised.csv"
+  
+# Spark Configuration
+spark:
+  app_name: "MovieReviewSentimentAnalysis"
+  master: "local[*]"
+  driver_memory: "4g"
+  executor_memory: "4g"
+  max_result_size: "2g"
+  
+# Text Processing Configuration
+text_processing:
+  min_word_length: 2
+  max_word_length: 50
+  remove_stopwords: true
+  language: "english"
+  max_vocab_size: 10000
+  min_document_frequency: 2
+  max_document_frequency: 0.95
+  
+# Feature Engineering
+features:
+  use_tfidf: true
+  use_bow: true
+  ngram_range: [1, 2]
+  max_features: 5000
+  
+# Model Configuration
+model:
+  algorithm: "naive_bayes"  # Options: naive_bayes, logistic_regression, random_forest, lstm, transformer, bert
+  test_size: 0.2
+  random_state: 42
+  cv_folds: 5
+  
+# PyTorch Configuration
+pytorch:
+  device: "auto"  # auto, cpu, cuda, mps
+  batch_size: 32
+  learning_rate: 0.001
+  num_epochs: 10
+  early_stopping_patience: 3
+  gradient_clip_norm: 1.0
+  
+# Neural Network Models
+neural_models:
+  lstm:
+    hidden_size: 128
+    num_layers: 2
+    dropout: 0.3
+    bidirectional: true
+    
+  transformer:
+    d_model: 256
+    nhead: 8
+    num_layers: 6
+    dropout: 0.1
+    max_length: 512
+    
+  bert:
+    model_name: "bert-base-uncased"
+    max_length: 512
+    freeze_bert: false
+    dropout: 0.1
+  
+# Evaluation Metrics
+evaluation:
+  metrics: ["accuracy", "precision", "recall", "f1", "auc"]
+  
+# MLOps Configuration
+mlops:
+  experiment_name: "movie_sentiment_analysis"
+  tracking_uri: "file:./mlruns"
+  log_artifacts: true
+  log_models: true
+  
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/app.log"
